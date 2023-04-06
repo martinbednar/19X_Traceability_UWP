@@ -25,10 +25,6 @@ namespace _19X_Traceability_UWP
         public MainPage()
         {
             this.InitializeComponent();
-
-            FlashDisks.Items.Add("FlashA");
-            FlashDisks.Items.Add("FlashB");
-            FlashDisks.Items.Add("FlashC");
         }
     }
 }

@@ -9,7 +9,7 @@
   <Identity
     Name="5ae23ce2-bdc3-4ded-8ef0-f92ade5e72d9"
     Publisher="CN=martin.bednar"
-    Version="1.0.0.0" />
+    Version="1.0.1.0" />
 
   <mp:PhoneIdentity PhoneProductId="5ae23ce2-bdc3-4ded-8ef0-f92ade5e72d9" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
 
