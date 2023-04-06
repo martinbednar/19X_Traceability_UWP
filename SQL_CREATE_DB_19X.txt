@@ -1,0 +1,328 @@
+CREATE TABLE [dbo].[alarmFK](
+	[id] [int] NOT NULL PRIMARY KEY,
+	[text] [nchar](200) NULL
+) ON [PRIMARY]
+GO
+
+CREATE TABLE [dbo].[alarmKK](
+	[id] [int] NOT NULL PRIMARY KEY,
+	[text] [nchar](200) NULL
+) ON [PRIMARY]
+GO
+
+CREATE TABLE [dbo].[alarmSK](
+	[id] [int] NOT NULL PRIMARY KEY,
+	[text] [nchar](200) NULL
+) ON [PRIMARY]
+GO
+
+CREATE TABLE [dbo].[FK](
+	[id] [int] IDENTITY(1,1) NOT NULL,
+	[dateTime] [datetime] NOT NULL,
+	[SN] [nchar](16) NOT NULL,
+	[SKP] [nchar](20) NULL,
+	[custNr] [nchar](20) NULL,
+	[keyCode] [nchar](10) NULL,
+	[result] [int] NULL,
+	[pcInSet] [int] NULL,
+	[actCnt] [int] NULL,
+	[home] [real] NULL,
+	[ins] [real] NULL,
+	[keyPress] [real] NOT NULL,
+	[spirollPress] [real] NOT NULL,
+	[takeOut] [real] NOT NULL,
+	[forceKey] [real] NOT NULL,
+	[forceSpiroll] [real] NOT NULL,
+	[notEnough] [real] NOT NULL,
+	[tooMuch] [real] NOT NULL,
+	[spirolDepth] [real] NOT NULL,
+ CONSTRAINT [PK_FK] PRIMARY KEY CLUSTERED
+(
+	[id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+
+CREATE TABLE [dbo].[KK](
+	[id] [int] IDENTITY(1,1) NOT NULL,
+	[dateTime] [datetime] NOT NULL,
+	[SN] [nchar](16) NOT NULL,
+	[SKP] [nchar](20) NOT NULL,
+	[custNr] [nchar](20) NOT NULL,
+	[keyCode] [nchar](10) NOT NULL,
+	[result] [int] NOT NULL
+) ON [PRIMARY]
+GO
+
+
+CREATE TABLE [dbo].[SK](
+	[id] [int] IDENTITY(1,1) NOT NULL,
+	[dateTime] [datetime] NOT NULL,
+	[SN] [nchar](16) NOT NULL,
+	[SKP] [nchar](20) NOT NULL,
+	[custNr] [nchar](20) NOT NULL,
+	[keyCode] [nchar](10) NOT NULL,
+	[result] [int] NOT NULL,
+	[pcInSet] [int] NOT NULL,
+	[actCnt] [int] NOT NULL,
+	[forceKey] [real] NOT NULL,
+	[forcePress] [real] NOT NULL,
+	[forcePull] [real] NOT NULL,
+ CONSTRAINT [PK_SK] PRIMARY KEY CLUSTERED 
+(
+	[id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+
+ALTER TABLE [dbo].[FK] ADD  CONSTRAINT [DF_FK_dateTime]  DEFAULT (getdate()) FOR [dateTime]
+GO
+ALTER TABLE [dbo].[KK] ADD  CONSTRAINT [DF_KK_dateTime]  DEFAULT (getdate()) FOR [dateTime]
+GO
+ALTER TABLE [dbo].[SK] ADD  CONSTRAINT [DF_SK_dateTime]  DEFAULT (getdate()) FOR [dateTime]
+GO
+
+
+
+
+INSERT [dbo].[alarmFK] ([id], [text]) VALUES (0, N'OK')
+GO
+INSERT [dbo].[alarmFK] ([id], [text]) VALUES (281, N'Není vloženo správné lůžko sklopného klíče ! (-CA1)')
+GO
+INSERT [dbo].[alarmFK] ([id], [text]) VALUES (282, N'Kontejner sklopného klíče není vložen ! (-CA1)')
+GO
+INSERT [dbo].[alarmFK] ([id], [text]) VALUES (283, N'Chyba vykonávaného procesu kamery sklopného klíče ! (-CA1)')
+GO
+INSERT [dbo].[alarmFK] ([id], [text]) VALUES (284, N'ERMO - chyba rotačního pohonu ! (-TA1)')
+GO
+INSERT [dbo].[alarmFK] ([id], [text]) VALUES (285, N'ERMO - jdnotka není připravena !  (-TA1)')
+GO
+INSERT [dbo].[alarmFK] ([id], [text]) VALUES (286, N'Fixace těla - sklopný klíč -  není otevřena (-BG13)')
+GO
+INSERT [dbo].[alarmFK] ([id], [text]) VALUES (287, N'Fixace těla - sklopný klíč -  není zavřena (-BG14)')
+GO
+INSERT [dbo].[alarmFK] ([id], [text]) VALUES (288, N'Fixace těla - sklopný klíč -  nedefinovaná pozice!')
+GO
+INSERT [dbo].[alarmFK] ([id], [text]) VALUES (289, N'Podpěra lis dříku - sklopný klíč -  není zasunuta (-BG7)')
+GO
+INSERT [dbo].[alarmFK] ([id], [text]) VALUES (290, N'Podpěra lis dříku - sklopný klíč -  není vysunuta (-BG8)')
+GO
+INSERT [dbo].[alarmFK] ([id], [text]) VALUES (291, N'Podpěra lis dříku - nedefinovaná pozice!')
+GO
+INSERT [dbo].[alarmFK] ([id], [text]) VALUES (292, N'Lis dříku - sklopný klíč -  není zasunut (-BG5)')
+GO
+INSERT [dbo].[alarmFK] ([id], [text]) VALUES (293, N'Lis dříku - sklopný klíč -  není vysunut (-BG6)')
+GO
+INSERT [dbo].[alarmFK] ([id], [text]) VALUES (294, N'Lis dříku - sklopný klíč -  nedefinovaná pozice!')
+GO
+INSERT [dbo].[alarmFK] ([id], [text]) VALUES (295, N'Dávkovač spirolů není připraven! (-A7)')
+GO
+INSERT [dbo].[alarmFK] ([id], [text]) VALUES (296, N'Nedošlo k vychystání spirolu! Prázdný zásobník?  (-A7)')
+GO
+INSERT [dbo].[alarmFK] ([id], [text]) VALUES (301, N'Hlavní vertikální zdvih není nahoře! (-BG01)')
+GO
+INSERT [dbo].[alarmFK] ([id], [text]) VALUES (302, N'Hlavní vertikální zdvih není dole! (-BG02)')
+GO
+INSERT [dbo].[alarmFK] ([id], [text]) VALUES (303, N'Hlavní vertikální zdvih nedefinovaná pozice!')
+GO
+INSERT [dbo].[alarmFK] ([id], [text]) VALUES (304, N'Hlavní vertikální zdvih - koncová poloha - porucha čidla! (-BG21)')
+GO
+INSERT [dbo].[alarmFK] ([id], [text]) VALUES (305, N'Test zalisování spirolu -není zasunut! (-BG11)')
+GO
+INSERT [dbo].[alarmFK] ([id], [text]) VALUES (306, N'Test zalisování spirolu -není vysunut! (-BG12)')
+GO
+INSERT [dbo].[alarmFK] ([id], [text]) VALUES (307, N'Zalisování spirolu se nezdařilo!')
+GO
+INSERT [dbo].[alarmFK] ([id], [text]) VALUES (308, N'Podání spirolu není zasunuto! (-BG9)')
+GO
+INSERT [dbo].[alarmFK] ([id], [text]) VALUES (309, N'Podání spirolu není vysunuto! (-BG10)')
+GO
+INSERT [dbo].[alarmFK] ([id], [text]) VALUES (310, N'Podání spirolu nedefinovaná pozice!')
+GO
+INSERT [dbo].[alarmFK] ([id], [text]) VALUES (311, N'Lisovací jehla spirolu není nahoře! (-BG03)')
+GO
+INSERT [dbo].[alarmFK] ([id], [text]) VALUES (312, N'Spirol nedolisován - lisovací jehla není dole!')
+GO
+INSERT [dbo].[alarmFK] ([id], [text]) VALUES (313, N'Lisovací jehla spirolu nedefinovaná pozice!')
+GO
+INSERT [dbo].[alarmFK] ([id], [text]) VALUES (314, N'Lis spirolu - koncová poloha - porucha čidla! (-BG22)')
+GO
+INSERT [dbo].[alarmFK] ([id], [text]) VALUES (315, N'Nesprávně nastaven doraz lisu!')
+GO
+INSERT [dbo].[alarmFK] ([id], [text]) VALUES (316, N'Spirol zablokován v hadici! (-A7)')
+GO
+INSERT [dbo].[alarmFK] ([id], [text]) VALUES (321, N'Spirol nebyl dostatečně zalisován!')
+GO
+INSERT [dbo].[alarmFK] ([id], [text]) VALUES (322, N'Spirol byl zalisován příliš hluboko!')
+GO
+INSERT [dbo].[alarmFK] ([id], [text]) VALUES (323, N'Nadávkováno více spirolů - vyčisti hadici!')
+GO
+INSERT [dbo].[alarmFK] ([id], [text]) VALUES (324, N'Kontejner sklopného klíče neodpovídá receptu!')
+GO
+INSERT [dbo].[alarmKK] ([id], [text]) VALUES (0, N'OK')
+GO
+INSERT [dbo].[alarmKK] ([id], [text]) VALUES (201, N'Kontejner odstraněn během procesu!')
+GO
+INSERT [dbo].[alarmKK] ([id], [text]) VALUES (202, N'Přečtené číslo sady neodpovídá číslu sady v receptu!')
+GO
+INSERT [dbo].[alarmKK] ([id], [text]) VALUES (203, N'Chyba čtecí/zapisovací RFID hlavy! (-BY1)')
+GO
+INSERT [dbo].[alarmKK] ([id], [text]) VALUES (204, N'Central stop montáž klíčů!  (-SS1)')
+GO
+INSERT [dbo].[alarmKK] ([id], [text]) VALUES (205, N'Central stop kontrola klíčů! (-SS2)')
+GO
+INSERT [dbo].[alarmKK] ([id], [text]) VALUES (206, N'Chyba IO link masteru! (-KF3)')
+GO
+INSERT [dbo].[alarmKK] ([id], [text]) VALUES (207, N'Chyba IO link vstupnÍho modulu! (-KF4)')
+GO
+INSERT [dbo].[alarmKK] ([id], [text]) VALUES (208, N'Chyba jištění rozvaděče! (-G1/-FU0/-FA3)')
+GO
+INSERT [dbo].[alarmKK] ([id], [text]) VALUES (209, N'')
+GO
+INSERT [dbo].[alarmKK] ([id], [text]) VALUES (210, N'Zámek šuplíku není zasunut! (-BG32)')
+GO
+INSERT [dbo].[alarmKK] ([id], [text]) VALUES (211, N'Zámek šuplíku není vysunut! (-BG33)')
+GO
+INSERT [dbo].[alarmKK] ([id], [text]) VALUES (212, N'Zámek šuplíku nedefinovaná pozice!')
+GO
+INSERT [dbo].[alarmKK] ([id], [text]) VALUES (213, N'Fixace spínací skříňky není nahoře! (-BG30)')
+GO
+INSERT [dbo].[alarmKK] ([id], [text]) VALUES (214, N'Fixace spínací skříňky není dole! (-BG31)')
+GO
+INSERT [dbo].[alarmKK] ([id], [text]) VALUES (215, N'Fixace spínací skříňky nedefinovaná pozice!')
+GO
+INSERT [dbo].[alarmKK] ([id], [text]) VALUES (221, N'Fixace dveřní vložky není nahoře! (-BG28)')
+GO
+INSERT [dbo].[alarmKK] ([id], [text]) VALUES (222, N'Fixace dveřní vložky není dole! (-BG29)')
+GO
+INSERT [dbo].[alarmKK] ([id], [text]) VALUES (223, N'Fixace dveřní vložky nedefinovaná pozice!')
+GO
+INSERT [dbo].[alarmKK] ([id], [text]) VALUES (224, N'Není vloženo správné lůžko! (-CA3)')
+GO
+INSERT [dbo].[alarmKK] ([id], [text]) VALUES (225, N'Chyba vykonávaného procesu kamery ! (-CA3)')
+GO
+INSERT [dbo].[alarmKK] ([id], [text]) VALUES (226, N'Klíč 1 není kompatibilní s dveřní vložkou!')
+GO
+INSERT [dbo].[alarmKK] ([id], [text]) VALUES (227, N'Klíč 2 není kompatibilní s dveřní vložkou!')
+GO
+INSERT [dbo].[alarmKK] ([id], [text]) VALUES (228, N'Klíč 1 není kompatibilní se spínací jednotkou!')
+GO
+INSERT [dbo].[alarmKK] ([id], [text]) VALUES (229, N'Chyba přenosu dat na tiskárnu štítků !')
+GO
+INSERT [dbo].[alarmKK] ([id], [text]) VALUES (230, N'Chyba čtečky QR kódu! (-BY4)')
+GO
+INSERT [dbo].[alarmKK] ([id], [text]) VALUES (231, N'Chyba čtení QR kódu! (-BY4)')
+GO
+INSERT [dbo].[alarmKK] ([id], [text]) VALUES (232, N'Špatný QR kód štítku!')
+GO
+INSERT [dbo].[alarmKK] ([id], [text]) VALUES (233, N'Nedovolená manipulace s odloženým klíčem !')
+GO
+INSERT [dbo].[alarmKK] ([id], [text]) VALUES (234, N'Nedovolená manipulace se skříňkou!')
+GO
+INSERT [dbo].[alarmKK] ([id], [text]) VALUES (235, N'Narušení optické závory!')
+GO
+INSERT [dbo].[alarmKK] ([id], [text]) VALUES (236, N'')
+GO
+INSERT [dbo].[alarmSK] ([id], [text]) VALUES (0, N'OK')
+GO
+INSERT [dbo].[alarmSK] ([id], [text]) VALUES (381, N'Není vloženo správné lůžko pevného klíče ! (-CA2)')
+GO
+INSERT [dbo].[alarmSK] ([id], [text]) VALUES (382, N'Kontejner pevného klíče není vložen ! (-CA2)')
+GO
+INSERT [dbo].[alarmSK] ([id], [text]) VALUES (383, N'Chyba vykonávaného procesu kamery sklopného klíče ! (-CA2)')
+GO
+INSERT [dbo].[alarmSK] ([id], [text]) VALUES (384, N'Fixace těla - pevný klíč -  není otevřena (-BG19)')
+GO
+INSERT [dbo].[alarmSK] ([id], [text]) VALUES (385, N'Fixace těla - pevný klíč -  není zavřena (-BG20)')
+GO
+INSERT [dbo].[alarmSK] ([id], [text]) VALUES (386, N'Fixace těla - pevný klíč -  nedefinovaná pozice!')
+GO
+INSERT [dbo].[alarmSK] ([id], [text]) VALUES (387, N'Fixace dříku - pevný klíč -  není otevřena (-BG17)')
+GO
+INSERT [dbo].[alarmSK] ([id], [text]) VALUES (388, N'Fixace dříku - pevný klíč -  není zavřena (-BG18)')
+GO
+INSERT [dbo].[alarmSK] ([id], [text]) VALUES (389, N'Fixace dříku - pevný klíč -  nedefinovaná pozice!')
+GO
+INSERT [dbo].[alarmSK] ([id], [text]) VALUES (390, N'Lis dříku - pevný klíč - není zasumut! (-BG15)')
+GO
+INSERT [dbo].[alarmSK] ([id], [text]) VALUES (391, N'Lis dříku - pevný klíč - není vysunut! (-BG16)')
+GO
+INSERT [dbo].[alarmSK] ([id], [text]) VALUES (392, N'Lis dříku - pevný klíč - nedefinovaná pozice!')
+GO
+INSERT [dbo].[alarmSK] ([id], [text]) VALUES (393, N'Chyba zalisování dříku pevného klíče!')
+GO
+INSERT [dbo].[alarmSK] ([id], [text]) VALUES (394, N'Příliš vysoká síla v nulové pozici!')
+GO
+INSERT [dbo].[alarmSK] ([id], [text]) VALUES (395, N'Nebylo dosaženo požadované síly při lisování!')
+GO
+INSERT [dbo].[alarmSK] ([id], [text]) VALUES (396, N'Nebylo dosaženo dostatečné síly při testu tahem!')
+GO
+INSERT [dbo].[alarmSK] ([id], [text]) VALUES (401, N'Příliš vysoká síla lisu!')
+GO
+INSERT [dbo].[alarmSK] ([id], [text]) VALUES (402, N'Příliš vysoká síla tahu!')
+GO
+
+
+
+
+
+INSERT [dbo].[FK] ([dateTime], [SN], [SKP], [custNr], [keyCode], [result], [pcInSet], [actCnt], [home], [ins], [keyPress], [spirollPress], [takeOut], [forceKey], [forceSpiroll], [notEnough], [tooMuch], [spirolDepth]) VALUES (CAST(N'2023-03-27T12:11:00.420' AS DateTime), N'RSAMG32211170001', N'311348000497412', N'806013335R', N'0011088', 255, 2, 1, 111.1, 111.2, 111.3, 111.4, 111.5, 111.6, 111.7, 111.7, 111.8, 111.9)
+GO
+INSERT [dbo].[FK] ([dateTime], [SN], [SKP], [custNr], [keyCode], [result], [pcInSet], [actCnt], [home], [ins], [keyPress], [spirollPress], [takeOut], [forceKey], [forceSpiroll], [notEnough], [tooMuch], [spirolDepth]) VALUES (CAST(N'2023-03-27T12:14:21.023' AS DateTime), N'RSAMG32211170001', N'311348000497412', N'806013335R', N'0011088', 255, 2, 1, 111.1, 111.2, 111.3, 111.4, 111.5, 111.6, 111.7, 111.7, 111.8, 111.9)
+GO
+INSERT [dbo].[FK] ([dateTime], [SN], [SKP], [custNr], [keyCode], [result], [pcInSet], [actCnt], [home], [ins], [keyPress], [spirollPress], [takeOut], [forceKey], [forceSpiroll], [notEnough], [tooMuch], [spirolDepth]) VALUES (CAST(N'2023-03-27T12:14:24.463' AS DateTime), N'RSAMG32211170001', N'311348000497412', N'806013335R', N'0011088', 255, 2, 1, 111.1, 111.2, 111.3, 111.4, 111.5, 111.6, 111.7, 111.7, 111.8, 111.9)
+GO
+INSERT [dbo].[FK] ([dateTime], [SN], [SKP], [custNr], [keyCode], [result], [pcInSet], [actCnt], [home], [ins], [keyPress], [spirollPress], [takeOut], [forceKey], [forceSpiroll], [notEnough], [tooMuch], [spirolDepth]) VALUES (CAST(N'2023-03-27T12:16:48.297' AS DateTime), N'RSAMG32211170001', N'311348000497412', N'806013335R', N'0011088', 255, 2, 1, 111.1, 111.2, 111.3, 111.4, 111.5, 111.6, 111.7, 111.7, 111.8, 111.9)
+GO
+INSERT [dbo].[FK] ([dateTime], [SN], [SKP], [custNr], [keyCode], [result], [pcInSet], [actCnt], [home], [ins], [keyPress], [spirollPress], [takeOut], [forceKey], [forceSpiroll], [notEnough], [tooMuch], [spirolDepth]) VALUES (CAST(N'2023-03-27T12:16:51.133' AS DateTime), N'RSAMG32211170001', N'311348000497412', N'806013335R', N'0011088', 255, 2, 1, 111.1, 111.2, 111.3, 111.4, 111.5, 111.6, 111.7, 111.7, 111.8, 111.9)
+GO
+
+
+
+
+
+INSERT [dbo].[KK] ([dateTime], [SN], [SKP], [custNr], [keyCode], [result]) VALUES (CAST(N'2023-03-23T09:59:30.273' AS DateTime), N'RSAMG32211170001', N'311348000497412', N'806013335R', N'0011088', 11)
+GO
+INSERT [dbo].[KK] ([dateTime], [SN], [SKP], [custNr], [keyCode], [result]) VALUES (CAST(N'2023-03-27T10:15:53.333' AS DateTime), N'RSAMG32211170001', N'311348000497412', N'806013335R', N'0011088', 11)
+GO
+INSERT [dbo].[KK] ([dateTime], [SN], [SKP], [custNr], [keyCode], [result]) VALUES (CAST(N'2023-03-27T10:16:05.260' AS DateTime), N'RSAMG32211170001', N'311348000497412', N'806013335R', N'0011088', 11)
+GO
+INSERT [dbo].[KK] ([dateTime], [SN], [SKP], [custNr], [keyCode], [result]) VALUES (CAST(N'2023-03-27T10:16:10.040' AS DateTime), N'RSAMG32211170001', N'311348000497412', N'806013335R', N'0011088', 11)
+GO
+INSERT [dbo].[KK] ([dateTime], [SN], [SKP], [custNr], [keyCode], [result]) VALUES (CAST(N'2023-03-27T10:19:48.710' AS DateTime), N'RSAMG32211170001', N'311348000497412', N'806013335R', N'0011088', 11)
+GO
+INSERT [dbo].[KK] ([dateTime], [SN], [SKP], [custNr], [keyCode], [result]) VALUES (CAST(N'2023-03-27T10:19:50.780' AS DateTime), N'RSAMG32211170001', N'311348000497412', N'806013335R', N'0011088', 11)
+GO
+INSERT [dbo].[KK] ([dateTime], [SN], [SKP], [custNr], [keyCode], [result]) VALUES (CAST(N'2023-03-27T10:19:52.227' AS DateTime), N'RSAMG32211170001', N'311348000497412', N'806013335R', N'0011088', 11)
+GO
+INSERT [dbo].[KK] ([dateTime], [SN], [SKP], [custNr], [keyCode], [result]) VALUES (CAST(N'2023-03-27T10:16:32.953' AS DateTime), N'RSAMG32211170001', N'311348000497412', N'806013335R', N'0011088', 11)
+GO
+INSERT [dbo].[KK] ([dateTime], [SN], [SKP], [custNr], [keyCode], [result]) VALUES (CAST(N'2023-03-27T10:16:51.950' AS DateTime), N'RSAMG32211170001', N'311348000497412', N'806013335R', N'0011088', 11)
+GO
+INSERT [dbo].[KK] ([dateTime], [SN], [SKP], [custNr], [keyCode], [result]) VALUES (CAST(N'2023-03-27T10:16:55.920' AS DateTime), N'RSAMG32211170001', N'311348000497412', N'806013335R', N'0011088', 11)
+GO
+INSERT [dbo].[KK] ([dateTime], [SN], [SKP], [custNr], [keyCode], [result]) VALUES (CAST(N'2023-03-27T10:17:02.227' AS DateTime), N'RSAMG32211170001', N'311348000497412', N'806013335R', N'0011088', 11)
+GO
+INSERT [dbo].[KK] ([dateTime], [SN], [SKP], [custNr], [keyCode], [result]) VALUES (CAST(N'2023-03-27T12:28:27.757' AS DateTime), N'RSAMG32211170001', N'311348000497412', N'806013335R', N'0011088', 11)
+GO
+INSERT [dbo].[KK] ([dateTime], [SN], [SKP], [custNr], [keyCode], [result]) VALUES (CAST(N'2023-03-27T12:28:38.587' AS DateTime), N'RSAMG32211170001', N'311348000497412', N'806013335R', N'0011088', 11)
+GO
+INSERT [dbo].[KK] ([dateTime], [SN], [SKP], [custNr], [keyCode], [result]) VALUES (CAST(N'2023-03-27T12:28:40.657' AS DateTime), N'RSAMG32211170001', N'311348000497412', N'806013335R', N'0011088', 11)
+GO
+INSERT [dbo].[KK] ([dateTime], [SN], [SKP], [custNr], [keyCode], [result]) VALUES (CAST(N'2023-03-27T12:28:48.473' AS DateTime), N'RSAMG32211170001', N'311348000497412', N'806013335R', N'0011088', 11)
+GO
+INSERT [dbo].[KK] ([dateTime], [SN], [SKP], [custNr], [keyCode], [result]) VALUES (CAST(N'2023-03-27T12:28:49.953' AS DateTime), N'RSAMG32211170001', N'311348000497412', N'806013335R', N'0011088', 11)
+GO
+
+
+
+
+
+INSERT [dbo].[SK] ([dateTime], [SN], [SKP], [custNr], [keyCode], [result], [pcInSet], [actCnt], [forceKey], [forcePress], [forcePull]) VALUES (CAST(N'2023-03-27T12:12:01.617' AS DateTime), N'RSAMG32211170001', N'311348000497412', N'806013335R', N'0011088', 25, 2, 1, 99.9, 1999.9, 9999.9)
+GO
+INSERT [dbo].[SK] ([dateTime], [SN], [SKP], [custNr], [keyCode], [result], [pcInSet], [actCnt], [forceKey], [forcePress], [forcePull]) VALUES (CAST(N'2023-03-27T12:19:02.607' AS DateTime), N'RSAMG32211170001', N'311348000497412', N'806013335R', N'0011088', 25, 2, 1, 99.9, 1999.9, 9999.9)
+GO
+INSERT [dbo].[SK] ([dateTime], [SN], [SKP], [custNr], [keyCode], [result], [pcInSet], [actCnt], [forceKey], [forcePress], [forcePull]) VALUES (CAST(N'2023-03-27T12:19:07.957' AS DateTime), N'RSAMG32211170001', N'311348000497412', N'806013335R', N'0011088', 25, 2, 1, 99.9, 1999.9, 9999.9)
+GO
