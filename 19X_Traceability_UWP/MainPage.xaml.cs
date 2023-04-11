@@ -1,17 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
-using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media;
-using Windows.UI.Xaml.Navigation;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
 
@@ -22,9 +12,58 @@ namespace _19X_Traceability_UWP
     /// </summary>
     public sealed partial class MainPage : Page
     {
+        private DispatcherTimer _driveConnectedTimer;
+        private string _connectedDriveName = string.Empty;
+
         public MainPage()
         {
             this.InitializeComponent();
+        }
+
+        private void Page_Loaded(object sender, RoutedEventArgs e)
+        {
+            // Watch example: https://learn.microsoft.com/en-us/uwp/api/windows.ui.xaml.dispatchertimer
+            DriveConnectedTimerSetup();
+        }
+        
+        private void DriveConnectedTimerSetup()
+        {
+            _driveConnectedTimer = new DispatcherTimer();
+            _driveConnectedTimer.Tick += DriveConnectedTimerTick;
+            _driveConnectedTimer.Interval = new TimeSpan(0, 0, 2);
+            _driveConnectedTimer.Start();
+        }
+
+        void DriveConnectedTimerTick(object sender, object e)
+        {
+            bool driveConnected = false;
+            foreach (var drive in DriveInfo.GetDrives())
+            {
+                if (drive.Name == "I:\\")
+                {
+                    driveConnected = true;
+                    _driveConnectedHandler(drive.Name);
+                }
+            }
+
+            if (!driveConnected)
+            {
+                _driveDisconnectedHandler();
+            }
+        }
+
+        private void _driveConnectedHandler(string driveName)
+        {
+            _connectedDriveName = driveName;
+            DriveConnected.Visibility = Visibility.Visible;
+            BtnExport.IsEnabled = true;
+        }
+
+        private void _driveDisconnectedHandler()
+        {
+            _connectedDriveName = String.Empty;
+            DriveConnected.Visibility = Visibility.Collapsed;
+            BtnExport.IsEnabled = false;
         }
     }
 }
