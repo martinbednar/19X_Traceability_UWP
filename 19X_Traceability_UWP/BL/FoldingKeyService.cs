@@ -7,11 +7,11 @@ namespace _19X_Traceability_UWP.BL
 {
     internal class FoldingKeyService
     {
-        public async void ExportFoldingKeys(DateTime from, DateTime to)
+        public async void ExportFoldingKeys(DateTime from, DateTime to, string connectedDriveName)
         {
             string fromString = from.ToString("dd.MM.yyyy");
             string toString = to.ToString("dd.MM.yyyy");
-
+            
             string query = @"SELECT
                 FK.id,
                 dateTime,
@@ -45,11 +45,7 @@ namespace _19X_Traceability_UWP.BL
 
             using (SqlDataReader reader = sqlCmd.ExecuteReader())
             {
-                //string fileName = "I:\\test.csv";
-                //StreamWriter sw = new StreamWriter(fileName);
-                //object[] output = new object[reader.FieldCount];
-
-                StorageFolder folder = await StorageFolder.GetFolderFromPathAsync(@"I:\");
+                StorageFolder folder = await StorageFolder.GetFolderFromPathAsync(connectedDriveName);
                 StorageFile file = await folder.CreateFileAsync("test.csv",
                     CreationCollisionOption.ReplaceExisting);
                 
