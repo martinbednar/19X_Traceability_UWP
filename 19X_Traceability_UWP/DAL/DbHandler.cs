@@ -4,7 +4,7 @@ namespace _19X_Traceability_UWP.DAL
 {
     internal class DbHandler
     {
-        private readonly string _connectionString = "Server=K2007;Database=19X;user id=dacia;password=PrestrojenaDacia19X";
+        private readonly string _connectionString = "Server=localhost\\SQLEXPRESS;Database=19X;user id=dacia;password=PrestrojenaDacia19X";
 
         private SqlConnection _dbConnection;
 
