@@ -1,8 +1,6 @@
 ﻿using System;
 using _19X_Traceability_UWP.DAL;
-using System.Collections.Generic;
 using System.Data.SqlClient;
-using System.IO;
 using Windows.Storage;
 
 namespace _19X_Traceability_UWP.BL
