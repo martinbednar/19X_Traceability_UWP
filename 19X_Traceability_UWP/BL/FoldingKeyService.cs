@@ -1,18 +1,8 @@
-﻿using System;
-using _19X_Traceability_UWP.DAL;
-using System.Data.SqlClient;
-using Windows.Storage;
-
-namespace _19X_Traceability_UWP.BL
+﻿namespace _19X_Traceability_UWP.BL
 {
-    internal class FoldingKeyService
+    internal class FoldingKeyService : KeyService
     {
-        public async void ExportFoldingKeys(DateTime from, DateTime to, string connectedDriveName)
-        {
-            string fromString = from.ToString("dd.MM.yyyy");
-            string toString = to.ToString("dd.MM.yyyy");
-            
-            string query = @"SELECT
+        protected override string SelectQuery { get; } = @"SELECT
                 FK.id,
                 dateTime,
                 SN,
@@ -33,45 +23,10 @@ namespace _19X_Traceability_UWP.BL
                 notEnough,
                 tooMuch,
                 spirolDepth
-                FROM FK LEFT OUTER JOIN alarmFK ON alarmFK.id = FK.result
-                ORDER BY FK.id ASC;";
+                FROM FK LEFT OUTER JOIN alarmFK ON alarmFK.id = FK.result";
 
-            DbHandler dbHandler = new DbHandler();
-            SqlCommand sqlCmd = dbHandler.CreateSqlCmd(query);
+        protected override string OrderByQuery { get; } = " ORDER BY FK.id ASC;";
 
-            sqlCmd.Parameters.Clear();
-            sqlCmd.Parameters.AddWithValue("@from", fromString);
-            sqlCmd.Parameters.AddWithValue("@to", toString);
-
-            using (SqlDataReader reader = sqlCmd.ExecuteReader())
-            {
-                StorageFolder folder = await StorageFolder.GetFolderFromPathAsync(connectedDriveName);
-                StorageFile file = await folder.CreateFileAsync("test.csv",
-                    CreationCollisionOption.ReplaceExisting);
-                
-                string outputStr = String.Empty;
-
-                object[] output = new object[reader.FieldCount];
-
-                for (int i = 0; i < reader.FieldCount; i++)
-                    output[i] = reader.GetName(i);
-
-                outputStr += string.Join(",", output) + "\n";
-
-                while (reader.Read())
-                {
-                    reader.GetValues(output);
-                    outputStr += string.Join(",", output) + "\n";
-                }
-
-
-
-                await FileIO.WriteTextAsync(file, outputStr);
-                
-                reader.Close();
-            }
-
-            dbHandler.CloseDbConn();
-        }
+        protected override string OutputFileName { get; } = "FoldingKey";
     }
 }

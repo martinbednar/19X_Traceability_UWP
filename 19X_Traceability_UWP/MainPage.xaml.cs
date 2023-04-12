@@ -52,20 +52,36 @@ namespace _19X_Traceability_UWP
         {
             _connectedDriveName = driveName;
             DriveConnected.Visibility = Visibility.Visible;
-            BtnExport.IsEnabled = true;
+            BtnExportLast.IsEnabled = true;
+            BtnExportDate.IsEnabled = true;
+            BtnExportAll.IsEnabled = true;
         }
 
         private void _driveDisconnectedHandler()
         {
             _connectedDriveName = String.Empty;
             DriveConnected.Visibility = Visibility.Collapsed;
-            BtnExport.IsEnabled = false;
+            BtnExportLast.IsEnabled = false;
+            BtnExportDate.IsEnabled = false;
+            BtnExportAll.IsEnabled = false;
         }
 
-        private void BtnExport_Click(object sender, RoutedEventArgs e)
+        private void BtnExportLast_Click(object sender, RoutedEventArgs e)
         {
-            FoldingKeyService foldingKeyService = new FoldingKeyService();
-            foldingKeyService.ExportFoldingKeys(From.Date.Date, To.Date.Date, _connectedDriveName);
+            ExportService exportService = new ExportService();
+            exportService.ExportLastKeys(_connectedDriveName);
+        }
+
+        private void BtnExportDate_Click(object sender, RoutedEventArgs e)
+        {
+            ExportService exportService = new ExportService();
+            exportService.ExportDateKeys(From.Date.Date, To.Date.Date.AddDays(1), _connectedDriveName);
+        }
+
+        private void BtnExportAll_Click(object sender, RoutedEventArgs e)
+        {
+            ExportService exportService = new ExportService();
+            exportService.ExportAllKeys(_connectedDriveName);
         }
     }
 }
