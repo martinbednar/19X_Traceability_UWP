@@ -27,7 +27,7 @@
                 <ColumnDefinition Width="4*"/>
             </Grid.ColumnDefinitions>
             <TextBlock Grid.Column="0" HorizontalAlignment="Right" TextWrapping="Wrap" Text="Od:" VerticalAlignment="Center"/>
-            <DatePicker Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="50" Width="600"/>
+            <DatePicker x:Name="From" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="50" Width="600"/>
         </Grid>
 
         <Grid Grid.Row="3">
@@ -36,7 +36,7 @@
                 <ColumnDefinition Width="4*"/>
             </Grid.ColumnDefinitions>
             <TextBlock Grid.Column="0" HorizontalAlignment="Right" TextWrapping="Wrap" Text="Do:" VerticalAlignment="Center"/>
-            <DatePicker Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="50" Width="600"/>
+            <DatePicker x:Name="To" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="50" Width="600"/>
         </Grid>
 
         <Grid Grid.Row="5">

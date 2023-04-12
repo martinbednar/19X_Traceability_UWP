@@ -4,13 +4,8 @@ using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using _19X_Traceability_UWP.BL;
 
-// The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
-
 namespace _19X_Traceability_UWP
 {
-    /// <summary>
-    /// An empty page that can be used on its own or navigated to within a Frame.
-    /// </summary>
     public sealed partial class MainPage : Page
     {
         private DispatcherTimer _driveConnectedTimer;
@@ -70,7 +65,7 @@ namespace _19X_Traceability_UWP
         private void BtnExport_Click(object sender, RoutedEventArgs e)
         {
             FoldingKeyService foldingKeyService = new FoldingKeyService();
-            foldingKeyService.ExportFoldingKeys(new DateTime(2023,3,20), new DateTime(2023,03,30));
+            foldingKeyService.ExportFoldingKeys(From.Date.Date, To.Date.Date, _connectedDriveName);
         }
     }
 }
