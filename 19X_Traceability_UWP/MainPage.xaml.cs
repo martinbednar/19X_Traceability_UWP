@@ -14,6 +14,8 @@ namespace _19X_Traceability_UWP
         public MainPage()
         {
             this.InitializeComponent();
+            From.Date = DateTime.Now;
+            To.Date = DateTime.Now;
         }
 
         private void Page_Loaded(object sender, RoutedEventArgs e)
@@ -35,7 +37,7 @@ namespace _19X_Traceability_UWP
             bool driveConnected = false;
             foreach (var drive in DriveInfo.GetDrives())
             {
-                if (drive.Name == "I:\\")
+                if (drive.Name != "C:\\")
                 {
                     driveConnected = true;
                     _driveConnectedHandler(drive.Name);
