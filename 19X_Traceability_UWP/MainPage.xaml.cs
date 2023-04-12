@@ -2,6 +2,7 @@
 using System.IO;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
+using _19X_Traceability_UWP.BL;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
 
@@ -64,6 +65,12 @@ namespace _19X_Traceability_UWP
             _connectedDriveName = String.Empty;
             DriveConnected.Visibility = Visibility.Collapsed;
             BtnExport.IsEnabled = false;
+        }
+
+        private void BtnExport_Click(object sender, RoutedEventArgs e)
+        {
+            FoldingKeyService foldingKeyService = new FoldingKeyService();
+            foldingKeyService.ExportFoldingKeys(new DateTime(2023,3,20), new DateTime(2023,03,30));
         }
     }
 }
