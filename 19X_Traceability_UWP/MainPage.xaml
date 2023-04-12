@@ -12,14 +12,21 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="1*"/>
-            <RowDefinition Height="0.5*"/>
+            <RowDefinition Height="0.2*"/>
             <RowDefinition Height="1*"/>
             <RowDefinition Height="1*"/>
-            <RowDefinition Height="0.5*"/>
+            <RowDefinition Height="0.2*"/>
             <RowDefinition Height="1*"/>
         </Grid.RowDefinitions>
 
-        <TextBlock Grid.Row="0" HorizontalAlignment="Center" TextWrapping="Wrap" Text="Export dat na flashdisk" VerticalAlignment="Center"/>
+        <Grid Grid.Row="0" Margin="0 20 0 0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="1*"/>
+            </Grid.ColumnDefinitions>
+            <TextBlock Grid.Column="0" HorizontalAlignment="Center" TextWrapping="Wrap" Text="Export dat na flashdisk" VerticalAlignment="Center"/>
+            <TextBlock x:Name="DriveConnected" Grid.Column="1" HorizontalAlignment="Center" TextWrapping="Wrap" Text="OK: Flashdisk připojen" VerticalAlignment="Center" FontSize="30" Visibility="Collapsed" />
+        </Grid>
 
         <Grid Grid.Row="2">
             <Grid.ColumnDefinitions>
@@ -39,13 +46,15 @@
             <DatePicker x:Name="To" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="50" Width="600"/>
         </Grid>
 
-        <Grid Grid.Row="5">
+        <Grid Grid.Row="5" Margin="0 0 0 20">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="1*"/>
                 <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
             </Grid.ColumnDefinitions>
-            <TextBlock x:Name="DriveConnected" Grid.Column="0" HorizontalAlignment="Center" TextWrapping="Wrap" Text="OK: Flashdisk připojen" VerticalAlignment="Center" FontSize="30" Visibility="Collapsed" />
-            <Button x:Name="BtnExport" Grid.Column="1" Content="Exportovat" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="50" Width="300" IsEnabled="False" Click="BtnExport_Click"/>
+            <Button x:Name="BtnExportLast" Grid.Column="0" Content="Exportovat nové" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="30" Width="300" IsEnabled="False" Click="BtnExportLast_Click" Visibility="Collapsed"/>
+            <Button x:Name="BtnExportDate" Grid.Column="1" Content="Exportovat od-do" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="30" Width="300" IsEnabled="False" Click="BtnExportDate_Click"/>
+            <Button x:Name="BtnExportAll" Grid.Column="2" Content="Exportovat vše" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="30" Width="300" IsEnabled="False" Click="BtnExportAll_Click"/>
         </Grid>
 
     </Grid>
