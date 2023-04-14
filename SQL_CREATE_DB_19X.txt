@@ -69,6 +69,10 @@ CREATE TABLE [dbo].[SK](
 	[forceKey] [real] NOT NULL,
 	[forcePress] [real] NOT NULL,
 	[forcePull] [real] NOT NULL,
+	[forcePressMin] [real] NOT NULL,
+	[forcePressMax] [real] NOT NULL,
+	[forcePullMin] [real] NOT NULL,
+	[forcePullMax] [real] NOT NULL,
  CONSTRAINT [PK_SK] PRIMARY KEY CLUSTERED 
 (
 	[id] ASC
@@ -320,9 +324,9 @@ GO
 
 
 
-INSERT [dbo].[SK] ([dateTime], [SN], [SKP], [custNr], [keyCode], [result], [pcInSet], [actCnt], [forceKey], [forcePress], [forcePull]) VALUES (CAST(N'2023-03-27T12:12:01.617' AS DateTime), N'RSAMG32211170001', N'311348000497412', N'806013335R', N'0011088', 25, 2, 1, 99.9, 1999.9, 9999.9)
+INSERT [dbo].[SK] ([dateTime], [SN], [SKP], [custNr], [keyCode], [result], [pcInSet], [actCnt], [forceKey], [forcePress], [forcePull], [forcePressMin], [forcePressMax], [forcePullMin], [forcePullMax]) VALUES (CAST(N'2023-03-27T12:12:01.617' AS DateTime), N'RSAMG32211170001', N'311348000497412', N'806013335R', N'0011088', 25, 2, 1, 99.9, 1999.9, 9999.9, 9999.9, 9999.9, 9999.9, 9999.9)
 GO
-INSERT [dbo].[SK] ([dateTime], [SN], [SKP], [custNr], [keyCode], [result], [pcInSet], [actCnt], [forceKey], [forcePress], [forcePull]) VALUES (CAST(N'2023-03-27T12:19:02.607' AS DateTime), N'RSAMG32211170001', N'311348000497412', N'806013335R', N'0011088', 25, 2, 1, 99.9, 1999.9, 9999.9)
+INSERT [dbo].[SK] ([dateTime], [SN], [SKP], [custNr], [keyCode], [result], [pcInSet], [actCnt], [forceKey], [forcePress], [forcePull], [forcePressMin], [forcePressMax], [forcePullMin], [forcePullMax]) VALUES (CAST(N'2023-03-27T12:19:02.607' AS DateTime), N'RSAMG32211170001', N'311348000497412', N'806013335R', N'0011088', 25, 2, 1, 99.9, 1999.9, 9999.9, 9999.9, 9999.9, 9999.9, 9999.9)
 GO
-INSERT [dbo].[SK] ([dateTime], [SN], [SKP], [custNr], [keyCode], [result], [pcInSet], [actCnt], [forceKey], [forcePress], [forcePull]) VALUES (CAST(N'2023-03-27T12:19:07.957' AS DateTime), N'RSAMG32211170001', N'311348000497412', N'806013335R', N'0011088', 25, 2, 1, 99.9, 1999.9, 9999.9)
+INSERT [dbo].[SK] ([dateTime], [SN], [SKP], [custNr], [keyCode], [result], [pcInSet], [actCnt], [forceKey], [forcePress], [forcePull], [forcePressMin], [forcePressMax], [forcePullMin], [forcePullMax]) VALUES (CAST(N'2023-03-27T12:19:07.957' AS DateTime), N'RSAMG32211170001', N'311348000497412', N'806013335R', N'0011088', 25, 2, 1, 99.9, 1999.9, 9999.9, 9999.9, 9999.9, 9999.9, 9999.9)
 GO

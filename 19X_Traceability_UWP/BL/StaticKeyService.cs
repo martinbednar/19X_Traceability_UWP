@@ -15,7 +15,11 @@
                 actCnt,
                 forceKey,
                 forcePress,
-                forcePull
+                forcePull,
+                forcePressMin,
+                forcePressMax,
+                forcePullMin,
+                forcePullMax
                 FROM SK LEFT OUTER JOIN alarmSK ON alarmSK.id = SK.result";
 
         protected override string OrderByQuery { get; } = " ORDER BY SK.id ASC;";
