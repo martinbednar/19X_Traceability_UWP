@@ -53,7 +53,9 @@ namespace _19X_Traceability_UWP
         private void _driveConnectedHandler(string driveName)
         {
             _connectedDriveName = driveName;
-            DriveConnected.Visibility = Visibility.Visible;
+            TextDriveConnected.Text = "PŘIPOJEN";
+            ImgDriveConnected.Visibility = Visibility.Visible;
+            ImgDriveDisconnected.Visibility = Visibility.Collapsed;
             BtnExportLast.IsEnabled = true;
             BtnExportDate.IsEnabled = true;
             BtnExportAll.IsEnabled = true;
@@ -62,7 +64,9 @@ namespace _19X_Traceability_UWP
         private void _driveDisconnectedHandler()
         {
             _connectedDriveName = String.Empty;
-            DriveConnected.Visibility = Visibility.Collapsed;
+            TextDriveConnected.Text = "NEPŘIPOJEN";
+            ImgDriveConnected.Visibility = Visibility.Collapsed;
+            ImgDriveDisconnected.Visibility = Visibility.Visible;
             BtnExportLast.IsEnabled = false;
             BtnExportDate.IsEnabled = false;
             BtnExportAll.IsEnabled = false;

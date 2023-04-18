@@ -145,6 +145,9 @@
     </AppxManifest>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Assets\flashdisk.jpg" />
+    <Content Include="Assets\green_dot.jpg" />
+    <Content Include="Assets\red_dot.jpg" />
     <Content Include="Properties\Default.rd.xml" />
     <Content Include="Assets\LockScreenLogo.scale-200.png" />
     <Content Include="Assets\SplashScreen.scale-200.png" />

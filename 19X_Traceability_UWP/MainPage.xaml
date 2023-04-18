@@ -7,54 +7,64 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
-    FontSize="50" Loaded="Page_Loaded" >
+    FontSize="60" Loaded="Page_Loaded" >
 
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="1*"/>
             <RowDefinition Height="0.2*"/>
-            <RowDefinition Height="1*"/>
-            <RowDefinition Height="1*"/>
+            <RowDefinition Height="0.9*"/>
+            <RowDefinition Height="0.1*"/>
+            <RowDefinition Height="0.9*"/>
             <RowDefinition Height="0.2*"/>
             <RowDefinition Height="1*"/>
         </Grid.RowDefinitions>
 
         <Grid Grid.Row="0" Margin="0 20 0 0">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="3*"/>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="0.3*"/>
                 <ColumnDefinition Width="1*"/>
             </Grid.ColumnDefinitions>
-            <TextBlock Grid.Column="0" HorizontalAlignment="Center" TextWrapping="Wrap" Text="Export dat na flashdisk" VerticalAlignment="Center"/>
-            <TextBlock x:Name="DriveConnected" Grid.Column="1" HorizontalAlignment="Center" TextWrapping="Wrap" Text="OK: Flashdisk připojen" VerticalAlignment="Center" FontSize="30" Visibility="Collapsed" />
+            <TextBlock Grid.Column="0" HorizontalAlignment="Left" TextWrapping="Wrap" Text="EXPORT DAT" VerticalAlignment="Center" Foreground="#FF424242" FontWeight="Bold" FontSize="70" Margin="50 0 0 0" Padding="0 0 0 10" />
+            <Image Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Center" Width="200" Source="Assets/flashdisk.jpg" />
+            <Image Grid.Column="2" x:Name="ImgDriveConnected" HorizontalAlignment="Right" VerticalAlignment="Center" Width="20" Source="Assets/green_dot.jpg" Margin="0 0 10 0" Visibility="Collapsed" />
+            <Image Grid.Column="2" x:Name="ImgDriveDisconnected" HorizontalAlignment="Right" VerticalAlignment="Center" Width="20" Source="Assets/red_dot.jpg" Margin="0 0 10 0" Visibility="Visible" />
+            <TextBlock Grid.Column="3" x:Name="TextDriveConnected" HorizontalAlignment="Left" TextWrapping="Wrap" Text="NEPŘIPOJEN" VerticalAlignment="Center" FontSize="30" />
         </Grid>
 
         <Grid Grid.Row="2">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="1*"/>
-                <ColumnDefinition Width="4*"/>
+                <ColumnDefinition Width="6*"/>
             </Grid.ColumnDefinitions>
-            <TextBlock Grid.Column="0" HorizontalAlignment="Right" TextWrapping="Wrap" Text="Od:" VerticalAlignment="Center"/>
-            <DatePicker x:Name="From" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="50" Width="600"/>
+            <TextBlock Grid.Column="0" HorizontalAlignment="Right" TextWrapping="Wrap" Text="OD:" VerticalAlignment="Center"/>
+            <Viewbox  Grid.Column="1" >
+                <DatePicker x:Name="From" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="30" Background="WhiteSmoke" />
+            </Viewbox>
         </Grid>
 
-        <Grid Grid.Row="3">
+        <Grid Grid.Row="4">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="1*"/>
-                <ColumnDefinition Width="4*"/>
+                <ColumnDefinition Width="6*"/>
             </Grid.ColumnDefinitions>
-            <TextBlock Grid.Column="0" HorizontalAlignment="Right" TextWrapping="Wrap" Text="Do:" VerticalAlignment="Center"/>
-            <DatePicker x:Name="To" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="50" Width="600"/>
+            <TextBlock Grid.Column="0" HorizontalAlignment="Right" TextWrapping="Wrap" Text="DO:" VerticalAlignment="Center"/>
+            <Viewbox  Grid.Column="1" >
+                <DatePicker x:Name="To" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="30" Background="WhiteSmoke" />
+            </Viewbox>
         </Grid>
 
-        <Grid Grid.Row="5" Margin="0 0 0 20">
+        <Grid Grid.Row="6" Margin="0 0 0 20">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="1*"/>
                 <ColumnDefinition Width="1*"/>
                 <ColumnDefinition Width="1*"/>
             </Grid.ColumnDefinitions>
-            <Button x:Name="BtnExportLast" Grid.Column="0" Content="Exportovat nové" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="30" Width="300" IsEnabled="False" Click="BtnExportLast_Click" Visibility="Collapsed"/>
-            <Button x:Name="BtnExportDate" Grid.Column="1" Content="Exportovat od-do" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="30" Width="300" IsEnabled="False" Click="BtnExportDate_Click"/>
-            <Button x:Name="BtnExportAll" Grid.Column="2" Content="Exportovat vše" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="30" Width="300" IsEnabled="False" Click="BtnExportAll_Click"/>
+            <Button x:Name="BtnExportLast" Grid.Column="0" Content="EXPORTOVAT NOVÉ" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="30" Width="320" IsEnabled="False" Click="BtnExportLast_Click" Height="110" Visibility="Collapsed" Foreground="#FF000000" Background="WhiteSmoke" BorderBrush="#FF000000" />
+            <Button x:Name="BtnExportDate" Grid.Column="1" Content="EXPORTOVAT OD-DO" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="30" Width="320" IsEnabled="False" Click="BtnExportDate_Click" Height="110" Foreground="#FF000000" Background="WhiteSmoke" BorderBrush="#FF000000" />
+            <Button x:Name="BtnExportAll" Grid.Column="2" Content="EXPORTOVAT VŠE" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="30" Width="320" IsEnabled="False" Click="BtnExportAll_Click" Height="110" Foreground="#FF000000" Background="WhiteSmoke" BorderBrush="#FF000000" />
         </Grid>
 
     </Grid>
