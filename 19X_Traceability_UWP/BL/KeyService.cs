@@ -70,12 +70,12 @@ namespace _19X_Traceability_UWP.BL
                 for (int i = 0; i < reader.FieldCount; i++)
                     output[i] = reader.GetName(i);
 
-                outputStr += string.Join(",", output) + "\n";
+                outputStr += string.Join(";", output) + "\n";
 
                 while (reader.Read())
                 {
                     reader.GetValues(output);
-                    outputStr += string.Join(",", output) + "\n";
+                    outputStr += string.Join(";", output) + "\n";
                 }
 
                 await FileIO.WriteTextAsync(file, outputStr);
