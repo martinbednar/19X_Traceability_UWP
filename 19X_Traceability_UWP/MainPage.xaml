@@ -40,9 +40,9 @@
                 <ColumnDefinition Width="6*"/>
             </Grid.ColumnDefinitions>
             <TextBlock Grid.Column="0" HorizontalAlignment="Right" TextWrapping="Wrap" Text="OD:" VerticalAlignment="Center"/>
-            <Viewbox  Grid.Column="1" >
-                <DatePicker x:Name="From" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="30" Background="WhiteSmoke" />
-            </Viewbox>
+            <!-- How to adjust DatePicker width (how to edit template):
+             https://stackoverflow.com/questions/33043070/setting-width-on-datepicker-or-timepicker-xaml-uap -->
+            <DatePicker Grid.Column="1" x:Name="From" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="100" Background="WhiteSmoke" Width="800" />
         </Grid>
 
         <Grid Grid.Row="4">
@@ -51,9 +51,7 @@
                 <ColumnDefinition Width="6*"/>
             </Grid.ColumnDefinitions>
             <TextBlock Grid.Column="0" HorizontalAlignment="Right" TextWrapping="Wrap" Text="DO:" VerticalAlignment="Center"/>
-            <Viewbox  Grid.Column="1" >
-                <DatePicker x:Name="To" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="30" Background="WhiteSmoke" />
-            </Viewbox>
+            <DatePicker Grid.Column="1" x:Name="To" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="100" Background="WhiteSmoke" Width="800" />
         </Grid>
 
         <Grid Grid.Row="6" Margin="0 0 0 20">
