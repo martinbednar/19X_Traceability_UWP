@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Threading.Tasks;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using _19X_Traceability_UWP.BL;
@@ -56,9 +57,7 @@ namespace _19X_Traceability_UWP
             TextDriveConnected.Text = "PŘIPOJEN";
             ImgDriveConnected.Visibility = Visibility.Visible;
             ImgDriveDisconnected.Visibility = Visibility.Collapsed;
-            BtnExportLast.IsEnabled = true;
-            BtnExportDate.IsEnabled = true;
-            BtnExportAll.IsEnabled = true;
+            EnableButtons();
         }
 
         private void _driveDisconnectedHandler()
@@ -67,27 +66,57 @@ namespace _19X_Traceability_UWP
             TextDriveConnected.Text = "NEPŘIPOJEN";
             ImgDriveConnected.Visibility = Visibility.Collapsed;
             ImgDriveDisconnected.Visibility = Visibility.Visible;
+            DisableButtons();
+        }
+
+        private void EnableButtons()
+        {
+            BtnExportLast.IsEnabled = true;
+            BtnExportDate.IsEnabled = true;
+            BtnExportAll.IsEnabled = true;
+        }
+
+        private void DisableButtons()
+        {
             BtnExportLast.IsEnabled = false;
             BtnExportDate.IsEnabled = false;
             BtnExportAll.IsEnabled = false;
         }
 
-        private void BtnExportLast_Click(object sender, RoutedEventArgs e)
+        private void ExportStartHandler()
         {
-            ExportService exportService = new ExportService();
-            exportService.ExportLastKeys(_connectedDriveName);
+            ExportProgressBar.Visibility = Visibility.Visible;
+            DisableButtons();
         }
 
-        private void BtnExportDate_Click(object sender, RoutedEventArgs e)
+        private void ExportFinishHandler()
         {
-            ExportService exportService = new ExportService();
-            exportService.ExportDateKeys(From.Date.Date, To.Date.Date.AddDays(1), _connectedDriveName);
+            EnableButtons();
+            ExportProgressBar.Visibility = Visibility.Collapsed;
         }
 
-        private void BtnExportAll_Click(object sender, RoutedEventArgs e)
+        private async void BtnExportLast_Click(object sender, RoutedEventArgs e)
         {
+            ExportStartHandler();
             ExportService exportService = new ExportService();
-            exportService.ExportAllKeys(_connectedDriveName);
+            await exportService.ExportLastKeys(_connectedDriveName);
+            ExportFinishHandler();
+        }
+
+        private async void BtnExportDate_Click(object sender, RoutedEventArgs e)
+        {
+            ExportStartHandler();
+            ExportService exportService = new ExportService();
+            await exportService.ExportDateKeys(From.Date.Date, To.Date.Date.AddDays(1), _connectedDriveName);
+            ExportFinishHandler();
+        }
+
+        private async void BtnExportAll_Click(object sender, RoutedEventArgs e)
+        {
+            ExportStartHandler();
+            ExportService exportService = new ExportService();
+            await exportService.ExportAllKeys(_connectedDriveName);
+            ExportFinishHandler();
         }
     }
 }
