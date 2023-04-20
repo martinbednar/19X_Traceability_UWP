@@ -132,6 +132,7 @@
     <Compile Include="BL\ExportService.cs" />
     <Compile Include="BL\FoldingKeyService.cs" />
     <Compile Include="BL\KeyService.cs" />
+    <Compile Include="BL\LogService.cs" />
     <Compile Include="BL\StaticKeyService.cs" />
     <Compile Include="DAL\DbHandler.cs" />
     <Compile Include="MainPage.xaml.cs">

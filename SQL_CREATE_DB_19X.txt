@@ -51,7 +51,11 @@ CREATE TABLE [dbo].[KK](
 	[SKP] [nchar](20) NOT NULL,
 	[custNr] [nchar](20) NOT NULL,
 	[keyCode] [nchar](10) NOT NULL,
-	[result] [int] NOT NULL
+	[result] [int] NOT NULL,
+ CONSTRAINT [PK_KK] PRIMARY KEY CLUSTERED
+(
+	[id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
 
@@ -87,6 +91,39 @@ ALTER TABLE [dbo].[KK] ADD  CONSTRAINT [DF_KK_dateTime]  DEFAULT (getdate()) FOR
 GO
 ALTER TABLE [dbo].[SK] ADD  CONSTRAINT [DF_SK_dateTime]  DEFAULT (getdate()) FOR [dateTime]
 GO
+
+
+
+
+CREATE TABLE [dbo].[exportType](
+	id INT NOT NULL PRIMARY KEY,
+	name NVARCHAR(255) NOT NULL UNIQUE
+)
+GO
+
+
+CREATE TABLE [dbo].[exportLog](
+	id INT IDENTITY(1,1) NOT NULL PRIMARY KEY,
+	timestamp DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	exportType INT NOT NULL FOREIGN KEY REFERENCES [dbo].[exportType](id),
+	firstFK INT FOREIGN KEY REFERENCES [dbo].[FK](id),
+	lastFK INT FOREIGN KEY REFERENCES [dbo].[FK](id),
+	firstKK INT FOREIGN KEY REFERENCES [dbo].[KK](id),
+	lastKK INT FOREIGN KEY REFERENCES [dbo].[KK](id),
+	firstSK INT FOREIGN KEY REFERENCES [dbo].[SK](id),
+	lastSK INT FOREIGN KEY REFERENCES [dbo].[SK](id)
+)
+GO
+
+
+
+INSERT [dbo].[exportType] ([id], [name]) VALUES (1, 'EXPORTOVAT NOVÉ')
+GO
+INSERT [dbo].[exportType] ([id], [name]) VALUES (2, 'EXPORTOVAT OD-DO')
+GO
+INSERT [dbo].[exportType] ([id], [name]) VALUES (3, 'EXPORTOVAT VŠE')
+GO
+
 
 
 
