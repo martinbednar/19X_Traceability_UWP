@@ -27,6 +27,8 @@
 
         protected override string OrderByQuery { get; } = " ORDER BY FK.id ASC;";
 
+        protected override string WhereQueryExportLast { get; } = " WHERE FK.id > (ISNULL((SELECT TOP (1) lastFK FROM exportLog WHERE exportType = 1 AND lastFK IS NOT NULL ORDER BY id DESC),0))";
+
         protected override string OutputFileName { get; } = "FoldingKey";
     }
 }

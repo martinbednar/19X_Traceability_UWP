@@ -12,18 +12,21 @@ namespace _19X_Traceability_UWP.BL
 
         protected abstract string OrderByQuery { get; }
 
+        protected abstract string WhereQueryExportLast { get; }
+
         protected abstract string OutputFileName { get; }
 
 
-        public async void ExportLast(string connectedDriveName)
+        public async Task<Tuple<int?, int?>> ExportLast(string connectedDriveName)
         {
             DbHandler dbHandler = new DbHandler();
-            SqlCommand sqlCmd = CreateSqlCmd(dbHandler, SelectQuery + OrderByQuery);
-            await Export(sqlCmd, connectedDriveName);
+            SqlCommand sqlCmd = CreateSqlCmd(dbHandler, SelectQuery + WhereQueryExportLast + OrderByQuery);
+            (int? firstId, int? lastId) = await Export(sqlCmd, connectedDriveName);
             dbHandler.CloseDbConn();
+            return new Tuple<int?, int?>(firstId, lastId);
         }
 
-        public async void ExportDate(DateTime from, DateTime to, string connectedDriveName)
+        public async Task<Tuple<int?, int?>> ExportDate(DateTime from, DateTime to, string connectedDriveName)
         {
             DbHandler dbHandler = new DbHandler();
             string whereQuery = " WHERE (cast(dateTime as DateTime) BETWEEN @from AND @to)";
@@ -31,16 +34,18 @@ namespace _19X_Traceability_UWP.BL
             string fromString = from.ToString("yyyy-MM-dd");
             string toString = to.ToString("yyyy-MM-dd");
             SetSqlParameters(sqlCmd, fromString, toString);
-            await Export(sqlCmd, connectedDriveName);
+            (int? firstId, int? lastId) = await Export(sqlCmd, connectedDriveName);
             dbHandler.CloseDbConn();
+            return new Tuple<int?, int?>(firstId, lastId);
         }
 
-        public async void ExportAll(string connectedDriveName)
+        public async Task<Tuple<int?, int?>> ExportAll(string connectedDriveName)
         {
             DbHandler dbHandler = new DbHandler();
             SqlCommand sqlCmd = CreateSqlCmd(dbHandler, SelectQuery + OrderByQuery);
-            await Export(sqlCmd, connectedDriveName);
+            (int? firstId, int? lastId) = await Export(sqlCmd, connectedDriveName);
             dbHandler.CloseDbConn();
+            return new Tuple<int?, int?>(firstId, lastId);
         }
 
         private SqlCommand CreateSqlCmd(DbHandler dbHandler, string sqlQuery)
@@ -55,7 +60,7 @@ namespace _19X_Traceability_UWP.BL
             sqlCmd.Parameters.AddWithValue("@to", to);
         }
 
-        private async Task Export(SqlCommand sqlCmd, string connectedDriveName)
+        private async Task<Tuple<int?, int?>> Export(SqlCommand sqlCmd, string connectedDriveName)
         {
             using (SqlDataReader reader = await sqlCmd.ExecuteReaderAsync())
             {
@@ -72,15 +77,30 @@ namespace _19X_Traceability_UWP.BL
 
                 outputStr += string.Join(";", output) + "\n";
 
+                bool isFirst = true;
+                int? firstId = null;
+                int? lastId = null;
+
                 while (reader.Read())
                 {
                     reader.GetValues(output);
+                    if (isFirst)
+                    {
+                        isFirst = false;
+                        firstId = (int) output[0];
+                    }
+                    else
+                    {
+                        lastId = (int) output[0];
+                    }
                     outputStr += string.Join(";", output) + "\n";
                 }
 
                 await FileIO.WriteTextAsync(file, outputStr);
 
                 reader.Close();
+
+                return new Tuple<int?, int?>(firstId, lastId);
             }
         }
     }

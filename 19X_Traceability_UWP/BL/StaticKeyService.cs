@@ -24,6 +24,8 @@
 
         protected override string OrderByQuery { get; } = " ORDER BY SK.id ASC;";
 
+        protected override string WhereQueryExportLast { get; } = " WHERE SK.id > (ISNULL((SELECT TOP (1) lastSK FROM exportLog WHERE exportType = 1 AND lastSK IS NOT NULL ORDER BY id DESC),0))";
+
         protected override string OutputFileName { get; } = "StaticKey";
     }
 }

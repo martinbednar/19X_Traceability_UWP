@@ -15,6 +15,7 @@
 
         protected override string OrderByQuery { get; } = " ORDER BY KK.id ASC;";
 
+        protected override string WhereQueryExportLast { get; } = " WHERE KK.id > (ISNULL((SELECT TOP (1) lastKK FROM exportLog WHERE exportType = 1 AND lastKK IS NOT NULL ORDER BY id DESC),0))";
 
         protected override string OutputFileName { get; } = "ControlKey";
     }
